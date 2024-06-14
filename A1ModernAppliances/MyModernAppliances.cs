@@ -2,6 +2,7 @@
 using ModernAppliances.Entities.Abstract;
 using ModernAppliances.Helpers;
 using System;
+using System.Runtime.InteropServices;
 
 namespace ModernAppliances
 {
@@ -28,23 +29,21 @@ namespace ModernAppliances
             Appliance foundAppliance = null;
             foreach (Appliance appliance in Appliances)
             {
-                if (appliance.ItemNumber == ap_number);
+                if (ap_number == appliance.ItemNumber)
                 {
                     foundAppliance = appliance;
-                    break;
                 }
             }
             if (foundAppliance == null)
             {
-
                 Console.WriteLine("No appliances found with that item number.");
             }
-            else if (!foundAppliance.IsAvailable)
+            else if (foundAppliance.IsAvailable == true)
             {
                 Console.WriteLine("Appliance has been checked out.");
                 foundAppliance.Checkout();
             }
-            else if (foundAppliance.IsAvailable)
+            else if (foundAppliance.IsAvailable == false)
             {
                 Console.WriteLine("The appliance is not available to be checked out.");
             }
