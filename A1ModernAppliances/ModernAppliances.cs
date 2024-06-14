@@ -65,6 +65,7 @@ namespace ModernAppliances
             Console.WriteLine("3 – Display appliances by type");
             Console.WriteLine("4 – Produce random appliance list");
             Console.WriteLine("5 – Save & exit");
+            Console.WriteLine("Enter option:");
         }
 
         /// <summary>
