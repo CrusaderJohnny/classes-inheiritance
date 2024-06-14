@@ -84,15 +84,13 @@ namespace ModernAppliances
         public override void DisplayRefrigerators()
         {
             Console.WriteLine("Possible options:\0 - Any\n2 - Double doors\n3 - Three doors\n4 - Four doors\n\nEnter number of doors: ");
-            string doorNum = Console.ReadLine();
             int newDoorNum = 0;
 
-            bool doorParse = int.TryParse(doorNum, out newDoorNum);
+            bool doorParse = int.TryParse(Console.ReadLine(), out newDoorNum);
             while (!doorParse || newDoorNum != 0 || newDoorNum < 2 || newDoorNum > 4)
             {
                 Console.WriteLine("Incorrect input, please input again.");
-                doorNum = Console.ReadLine();
-                doorParse = int.TryParse(doorNum, out newDoorNum);
+                doorParse = int.TryParse(Console.ReadLine(), out newDoorNum);
             }
             List<Appliance> found_appliances = new List<Appliance>();
             foreach (Appliance appliance in Appliances)
@@ -210,13 +208,13 @@ namespace ModernAppliances
                 if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Microwave)
                 {
                     Microwave micro = appliance as Microwave;
-                    if (micro.RoomType == room_type)
+                    if (room_type == 'A')
                     {
-                        microwave.Add(appliance);
+                        microwave.Add(micro);
                     }
-                    else
+                    else if (micro.RoomType == room_type)
                     {
-                        microwave.Add(appliance);
+                         microwave.Add(micro); 
                     }
                 }
             }
