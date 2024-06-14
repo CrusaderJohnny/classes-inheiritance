@@ -32,7 +32,7 @@ namespace ModernAppliances
             Appliance? foundAppliance = null;
             foreach (Appliance appliance in Appliances)
             {
-                if (appliance.ItemNumber == ap_number) ;
+                if (appliance.ItemNumber == ap_number);
                 {
                     foundAppliance = (appliance);
                     break;
@@ -87,19 +87,20 @@ namespace ModernAppliances
             string doorNum = Console.ReadLine();
             int newDoorNum = 0;
 
-            bool doorParse = Int32.TryParse(doorNum, out newDoorNum);
+            bool doorParse = int.TryParse(doorNum, out newDoorNum);
             while (!doorParse || newDoorNum != 0 || newDoorNum < 2 || newDoorNum > 4)
             {
                 Console.WriteLine("Incorrect input, please input again.");
                 doorNum = Console.ReadLine();
-                doorParse = Int32.TryParse(doorNum, out newDoorNum);
+                doorParse = int.TryParse(doorNum, out newDoorNum);
             }
             List<Appliance> found_appliances = new List<Appliance>();
-            foreach (Refrigerator appliance in Appliances)
+            foreach (Appliance appliance in Appliances)
             {
                 if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Refrigerator)
                 {
-                    if (appliance.Doors == newDoorNum)
+                    Refrigerator fridge = appliance as Refrigerator;
+                    if (fridge.Doors == newDoorNum)
                     {
                         found_appliances.Add(appliance);
                     }
@@ -158,15 +159,19 @@ namespace ModernAppliances
                     break;
             }
             List<Appliance> vacuum = new List<Appliance>();
-            foreach (Vacuum appliance in vacuum)
+            foreach (Appliance appliance in vacuum)
             {
-                if (appliance.BatteryVoltage == vac_volt)
+                if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Vacuum)
                 {
-                    vacuum.Add(appliance);
-                }
-                else
-                {
-                    vacuum.Add(appliance);
+                    Vacuum vac = appliance as Vacuum;
+                    if (vac.BatteryVoltage == vac_volt)
+                    {
+                        vacuum.Add(appliance);
+                    }
+                    else
+                    {
+                        vacuum.Add(appliance);
+                    }
                 }
             }
             DisplayAppliancesFromList(vacuum, vacuum.Count);
@@ -200,20 +205,23 @@ namespace ModernAppliances
                     break;
             }
             List<Appliance> microwave = new List<Appliance>();
-            foreach (Microwave appliance in Appliances)
+            foreach (Appliance appliance in Appliances)
             {
-                if (appliance.RoomType == room_type)
+                if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Microwave)
                 {
-                    microwave.Add(appliance);
-                }
-                else
-                {
-                    microwave.Add(appliance);
+                    Microwave micro = appliance as Microwave;
+                    if (micro.RoomType == room_type)
+                    {
+                        microwave.Add(appliance);
+                    }
+                    else
+                    {
+                        microwave.Add(appliance);
+                    }
                 }
             }
             DisplayAppliancesFromList(microwave, microwave.Count);
         }
-
         /// <summary>
         /// Displays dishwashers
         /// </summary>
@@ -248,15 +256,19 @@ namespace ModernAppliances
                     break;
             }
             List<Appliance> dishwashers = new List<Appliance>();
-            foreach (Dishwasher appliance in Appliances)
+            foreach (Appliance appliance in Appliances)
             {
-                if (appliance.SoundRating == sound_rate)
+                if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Dishwasher)
                 {
-                    dishwashers.Add(appliance);
-                }
-                else
-                {
-                    dishwashers.Add(appliance);
+                    Dishwasher dis = appliance as Dishwasher;
+                    if (dis.SoundRating == sound_rate)
+                    {
+                        dishwashers.Add(appliance);
+                    }
+                    else
+                    {
+                        dishwashers.Add(appliance);
+                    }
                 }
             }
             DisplayAppliancesFromList(dishwashers, dishwashers.Count);
