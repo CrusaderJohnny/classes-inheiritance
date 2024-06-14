@@ -83,11 +83,15 @@ namespace ModernAppliances
         /// </summary>
         public override void DisplayRefrigerators()
         {
-            Console.WriteLine("Possible options:\0 - Any\n2 - Double doors\n3 - Three doors\n4 - Four doors\n\nEnter number of doors: ");
+            Console.WriteLine("Possible options:\n0 - Any\n2 - Double doors\n3 - Three doors\n4 - Four doors\n\nEnter number of doors: ");
             int newDoorNum = 0;
-
+            List<int> door_values = new List<int>();
+            door_values.Add(0);
+            door_values.Add(2);
+            door_values.Add(3);
+            door_values.Add(4);
             bool doorParse = int.TryParse(Console.ReadLine(), out newDoorNum);
-            while (!doorParse || newDoorNum != 0 || newDoorNum < 2 || newDoorNum > 4)
+            while (!doorParse || !door_values.Contains(newDoorNum))
             {
                 Console.WriteLine("Incorrect input, please input again.");
                 doorParse = int.TryParse(Console.ReadLine(), out newDoorNum);
@@ -103,8 +107,8 @@ namespace ModernAppliances
                         found_appliances.Add(appliance);
                     }
                 }
-                DisplayAppliancesFromList(found_appliances, found_appliances.Count);
             }
+            DisplayAppliancesFromList(found_appliances, found_appliances.Count);
         }
 
         /// <summary>
@@ -122,7 +126,7 @@ namespace ModernAppliances
                 Console.WriteLine("Error, Invalid Entry");
                 valid_vac = int.TryParse(Console.ReadLine(), out vac_num);
             }
-            string grade_value;
+            string grade_value = "";
             switch (vac_num)
             {
                 case 0:
@@ -138,7 +142,7 @@ namespace ModernAppliances
             int volt;
             Console.WriteLine("Possible options:\n0 - Any\n1 - 18 volt\n2 - 24 volt\nEnter Voltage: ");
             bool valid_volt = int.TryParse(Console.ReadLine(),out volt);
-            while (!valid_volt || volt <0 || volt > 2)
+            while (!valid_volt || volt < 0 || volt > 2)
             {
                 Console.WriteLine("Error, invalid entry");
                 valid_volt = int.TryParse(Console.ReadLine(), out volt);
@@ -162,11 +166,11 @@ namespace ModernAppliances
                 if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Vacuum)
                 {
                     Vacuum vac = appliance as Vacuum;
-                    if (vac.BatteryVoltage == vac_volt)
+                    if (grade_value == "Any")
                     {
                         vacuum.Add(appliance);
                     }
-                    else
+                    else if (vac.BatteryVoltage == vac_volt)
                     {
                         vacuum.Add(appliance);
                     }
@@ -259,13 +263,13 @@ namespace ModernAppliances
                 if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Dishwasher)
                 {
                     Dishwasher dis = appliance as Dishwasher;
-                    if (dis.SoundRating == sound_rate)
+                    if (sound_rate == "Any")
                     {
-                        dishwashers.Add(appliance);
+                        dishwashers.Add(dis);
                     }
-                    else
+                    else if (dis.SoundRating == sound_rate)
                     {
-                        dishwashers.Add(appliance);
+                        dishwashers.Add(dis);
                     }
                 }
             }
