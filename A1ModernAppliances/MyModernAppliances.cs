@@ -18,40 +18,35 @@ namespace ModernAppliances
         public override void Checkout()
         {
             Console.WriteLine("Enter the item number of an appliance: ");
-            string appliance_number_input = Console.ReadLine();
             long ap_number;
-
-            bool appNumParce = long.TryParse(appliance_number_input, out ap_number);
+            bool appNumParce = long.TryParse(Console.ReadLine(), out ap_number);
             while (appNumParce == false)
             {
                 Console.WriteLine("Invalid input, try again.");
-                appliance_number_input = Console.ReadLine();
-                appNumParce = long.TryParse(appliance_number_input, out ap_number);
+                appNumParce = long.TryParse(Console.ReadLine(), out ap_number);
             }
-
-            Appliance? foundAppliance = null;
+            Appliance foundAppliance = null;
             foreach (Appliance appliance in Appliances)
             {
                 if (appliance.ItemNumber == ap_number);
                 {
-                    foundAppliance = (appliance);
+                    foundAppliance = appliance;
                     break;
                 }
             }
             if (foundAppliance == null)
             {
+
                 Console.WriteLine("No appliances found with that item number.");
             }
-            else
+            else if (!foundAppliance.IsAvailable)
             {
-                if (foundAppliance.IsAvailable == true)
-                {
-                    Console.WriteLine("Appliance has been checked out.");
-                }
-                else
-                {
-                    Console.WriteLine("The appliance is not available to be checked out.");
-                }
+                Console.WriteLine("Appliance has been checked out.");
+                foundAppliance.Checkout();
+            }
+            else if (foundAppliance.IsAvailable)
+            {
+                Console.WriteLine("The appliance is not available to be checked out.");
             }
         }
         /// <summary>
