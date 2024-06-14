@@ -161,7 +161,7 @@ namespace ModernAppliances
                     break;
             }
             List<Appliance> vacuum = new List<Appliance>();
-            foreach (Appliance appliance in vacuum)
+            foreach (Appliance appliance in Appliances)
             {
                 if (Appliance.DetermineApplianceTypeFromItemNumber(appliance.ItemNumber) == Appliance.ApplianceTypes.Vacuum)
                 {
